@@ -35,11 +35,10 @@ class Game
                     puts "#{@P1}: #{score.display_score()} vs #{@P2}: #{score.display_score()}"
                     puts "-----NEW TURN-----"
                 else
-                    puts "#{player}: you are wrong"
+                    score.decrease_score()
+                    puts "#{player}: you are wrong"  
                     puts "#{@P1}: #{score.display_score()} vs #{@P2}: #{score.display_score()}"
                     puts "-----NEW TURN-----"
-                    #   score.decrese_for_score()
-                    # score -= 1 
                 end
                 # decrements player lives if wrong => method in your player class
                 # checks to see if game should continue (player has more than 0 lives) => if statement in your start
