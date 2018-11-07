@@ -1,6 +1,5 @@
 require './question.rb'
 require './player.rb'
-# require './score.rb'
 
     # The game needs to start
     # The game requires two players to begin
@@ -21,34 +20,45 @@ class Game
         # runs your game loop
         @players.cycle do |player| 
             # every loop =>
-            puts "#{player.name}'s Turn"              
             # asks a user a question => method from question classs
             question = Question.new
-            # score = Score.new
-
-            puts "#{player.name}: #{question.ask_question()}"
+            puts "Question for #{player.name}:"
+            puts "#{question.ask_question()}"
             print "> "
             check_answer = question.correct_answer?()
 
                 if check_answer
-                    puts "#{player.name}: You are right"
-                    puts "#{@P1.name}: #{player.display_score()} vs #{@P2.name}: #{player.display_score()}"
-                    puts "-----NEW TURN-----"
-                else
-                    player.decrease_score()
-                    puts "#{player.name}: you are wrong"  
+                    puts "Good job, #{player.name} you are correct!"
+                    puts "And the score is..."
                     puts "#{@P1.name}: #{@P1.display_score()} vs #{@P2.name}: #{@P2.display_score()}"
-                    puts "-----NEW TURN-----"
+                else
+                # decrements player lives if wrong => method in your player class    
+                    player.decrease_score()
+                    puts "Oh, #{player.name}... that is not the right answer."  
+                    puts "And the score is..."
+                    puts "#{@P1.name}: #{@P1.display_score()} vs #{@P2.name}: #{@P2.display_score()}"
                 end
-                # decrements player lives if wrong => method in your player class
+
                 # checks to see if game should continue (player has more than 0 lives) => if statement in your start
+                if @P1.score == 0
+                    puts "#{@P2.name} wins with a score of #{@P2.display_score()}."
+                    puts "----- Game Over ------"
+                    puts "Bye bye!"
+                    break
+
+                elsif @P2.score == 0  
+                    puts "#{@P2.name} wins with a score of #{@P2.display_score()}."
+                    puts "----- Game Over ------"
+                    puts "Bye bye!"
+                    break
+                else 
+                    puts "----- Next turn ------"
+                end
         
         end
     end
 
 end
 
-game = Game.new("Bassem", "Monica")
-game.start
-# puts game.P1
-# puts game.P2
+# game = Game.new("Andrea", "Matthew")
+# game.start

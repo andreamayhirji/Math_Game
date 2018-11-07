@@ -1,4 +1,3 @@
-require './score.rb'
 # A new math question is generated for each turn by picking two numbers between 1 and 20
 
 class Question
@@ -21,10 +20,6 @@ end
     
 end
 
-
-#question = Question.new
-#question.ask_question
-#puts question.correct_answer?
 
 
 
