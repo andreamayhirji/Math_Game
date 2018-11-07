@@ -4,10 +4,23 @@
 # each player takes turn asking questions.
 
 class Player
+attr_accessor :name, :score
 
     def initialize(name, score = 3)
         @name = name
         @score = score
+    end
+
+    def decrease_score
+        @score -= 1
+        # current_score out of score needs to be written as a fraction
+        # puts "P1: 3/3 P2: 3/3"
+        # if score == 0 game over puts "The game is over, P? is the winner"
+        # if score > 0 game continues, next question is asked puts "-----NEW TURN-----"
+    end
+
+    def display_score
+        "#{@score}/3"
     end
 
 end
