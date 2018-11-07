@@ -1,22 +1,30 @@
 require './score.rb'
+# A new math question is generated for each turn by picking two numbers between 1 and 20
 
 class Question
-    # A new math question is generated for each turn by picking two numbers between 1 and 20
-    
-    def ask_question #public method?
-        prng = Random.new
-        num1 = prng.rand(20)
-        num2 = prng.rand(20)
-        puts "What does #{num1} + #{num2} equal?"
-        # maybe I don't do this here....
-        # if answer is false score -= 1 puts "wrong"
-        # else answer is true puts "correct"
+
+def initialize
+    prng = Random.new
+    @num1 = prng.rand(20)
+    @num2 = prng.rand(20) 
+end 
+
+    def ask_question 
+        "What does #{@num1} + #{@num2} equal?"
+    end
+
+    def correct_answer?
+        answer = $stdin.gets.chomp.to_i
+        correct_answer = @num1 + @num2
+        correct_answer == answer
     end
     
 end
 
 
-# question1 = Question.new
-# question1.ask_question
+#question = Question.new
+#question.ask_question
+#puts question.correct_answer?
+
 
 

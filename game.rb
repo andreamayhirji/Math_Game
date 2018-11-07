@@ -2,13 +2,12 @@ require './question.rb'
 require './player.rb'
 require './score.rb'
 
-class Game
-
     # The game needs to start
     # The game requires two players to begin
     # The game ends when a player's score == 0
     # The game would contain the loop
 
+class Game
     attr_reader :P1, :P2 
 
     def initialize(player1, player2)
@@ -22,21 +21,35 @@ class Game
         # runs your game loop
         @players.cycle do |player| 
             # every loop =>
-            puts 'Ask a question'                
+            puts "#{player}'s Turn"              
             # asks a user a question => method from question classs
             question = Question.new
-            question.ask_question()
-                # accepts a answer => gets.chomp
-                # checks to see if answer is right => method from question class that accepts gets.chomp 
+            score = Score.new
+
+            puts "#{player}: #{question.ask_question()}"
+            print "> "
+            check_answer = question.correct_answer?()
+
+                if check_answer
+                    puts "#{player}: You are right"
+                    puts "#{@P1}: #{score.display_score()} vs #{@P2}: #{score.display_score()}"
+                    puts "-----NEW TURN-----"
+                else
+                    puts "#{player}: you are wrong"
+                    puts "#{@P1}: #{score.display_score()} vs #{@P2}: #{score.display_score()}"
+                    puts "-----NEW TURN-----"
+                    #   score.decrese_for_score()
+                    # score -= 1 
+                end
                 # decrements player lives if wrong => method in your player class
                 # checks to see if game should continue (player has more than 0 lives) => if statement in your start
-        break
+        
         end
     end
 
 end
 
-game = Game.new("Andrea", "Matthew")
+game = Game.new("player 1", "player 2")
 game.start
 # puts game.P1
 # puts game.P2
